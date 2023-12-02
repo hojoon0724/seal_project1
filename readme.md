@@ -30,81 +30,17 @@ The Data I get back:
 ```json
 [
   {
-    "ingredient": "Bergamot",
-    "description": "A citrus fruit with a bright, uplifting scent."
-  },
-]
-
-events
-:
-[]
-featured
-:
-false
-id
-:
-21687
-image_url
-:
-"https://spacenews.com/wp-content/uploads/2023/12/231130-X-FC312-0001-300x239.jpg"
-launches
-:
-[]
-news_site
-:
-"SpaceNews"
-published_at
-:
-"2023-12-02T13:34:11Z"
-summary
-:
-"Canada is the first international partner to access the U.S. Mobile User Objective System (MUOS) satellite network, the U.S. Space Force announced Nov. 30."
-title
-:
-"Canada taps into U.S. military satellites for mobile communications"
-updated_at
-:
-"2023-12-02T13:39:15.410000Z"
-url
-:
-"https://spacenews.com/canada-taps-into-u-s-military-satellites-for-mobile-communications/"
-
-
-[{
-    "ingredient": "Lavender",
-    "description": "A flowering plant with a calming, relaxing scent."
-  },
-  {
-    "ingredient": "Rose",
-    "description": "A flowering plant with a romantic, feminine scent."
-  },
-  {
-    "ingredient": "Jasmine",
-    "description": "A flowering plant with an exotic, sensual scent."
-  },
-  {
-    "ingredient": "Sandalwood",
-    "description": "A woody plant with a warm, earthy scent."
-  },
-  {
-    "ingredient": "Patchouli",
-    "description": "A herb with a deep, musky scent."
-  },
-  {
-    "ingredient": "Vanilla",
-    "description": "A spice with a sweet, gourmand scent."
-  },
-  {
-    "ingredient": "Amber",
-    "description": "A fossilized resin with a warm, balsamic scent."
-  },
-  {
-    "ingredient": "Musk",
-    "description": "An animal secretion with a sensual, musky scent."
-  },
-  {
-    "ingredient": "Oud",
-    "description": "A type of agarwood with a dark, mysterious scent."
+    "events": "[]",
+    "featured": "false",
+    "id": "21687",
+    "image_url": "https://spacenews.com/wp-content/uploads/2023/12/231130-X-FC312-0001-300x239.jpg",
+    "launches": "[]",
+    "news_site": "SpaceNews",
+    "published_at": "2023-12-02T13:34:11Z",
+    "summary": "Canada is the first international partner to access the U.S. Mobile User Objective System (MUOS) satellite network, the U.S. Space Force announced Nov. 30.",
+    "title": "Canada taps into U.S. military satellites for mobile communications",
+    "updated_at": "2023-12-02T13:39:15.410000Z",
+    "url": "https://spacenews.com/canada-taps-into-u-s-military-satellites-for-mobile-communications/"
   }
 ]
 ```
