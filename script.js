@@ -4,7 +4,7 @@
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
 const $topContainer = $(".top-container");
-let limitOfArticlesAmount = 12;
+let limitOfArticlesAmount = 3;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = [];
 
@@ -15,7 +15,7 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 
 function getNews() {
   //! Change it back to "url" when it's for realz
-  fetch(url)
+  fetch("/api-response-placeholder.json")
     .then((res) => {
       return res.json();
     })
@@ -28,17 +28,25 @@ function getNews() {
 
 // Rendering to the screen
 function renderNews() {
-  for (i = 0; i < newsArray.length; i++) {
+  for (i = 0; i < limitOfArticlesAmount; i++) {
+    // Make tile
     let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
     $topContainer.append($newsBoxContainer);
 
+    // Get photo
     let $newsPhotoContainer = $("<div>").attr("class", "news-photo");
     console.log(newsArray[i].image_url);
-    $newsPhotoContainer.html(`<img src="${newsArray[i].image_url}"`);
+    $newsPhotoContainer.html(`<img src="${newsArray[i].image_url}">`);
     $newsBoxContainer.append($newsPhotoContainer);
 
+    // Text Container
     let $newsTextContainer = $("<div>").attr("class", "news-text-container");
     $newsBoxContainer.append($newsTextContainer);
+
+    // Actual Content
+    let $newsPublishDate = $();
+    let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
+    $newsTextContainer.append($newsTime);
 
     let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
     $newsTextContainer.append($newsTitle);
@@ -49,7 +57,6 @@ function renderNews() {
     let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
     $newsTextContainer.append($newsSummary);
   }
-  console.log(newsArray[1].image_url);
 }
 // console.log(newsArray[1].image_url);
 // -----------------------------------------------------

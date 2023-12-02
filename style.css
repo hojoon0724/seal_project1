@@ -1,6 +1,42 @@
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search {
+  width: 200px;
+  border: 0px;
+  height: 24pt;
+  border-radius: 24px;
+}
+
 body {
   background-color: #292929;
   color: #efefef;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.top-container {
+  max-width: 1200px;
+}
+
+.news-box-container {
+  width: 300px;
+  object-fit: contain;
+}
+
+.news-photo {
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.news-photo img {
+  object-fit: fill;
 }
