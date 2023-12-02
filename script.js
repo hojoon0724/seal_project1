@@ -14,14 +14,17 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 // Fetch the stuff
 
 function getNews() {
-  fetch(url)
+  //! Change it back to "url" when it's for realz
+  fetch("/api-response-placeholder.json")
     .then((res) => {
       return res.json();
     })
     .then((data) => {
       newsArray = data.results;
       renderNews();
-      console.log(data);
+      console.log(data.results);
+
+      console.log(data.results[2].image_url);
     });
 }
 
@@ -38,13 +41,31 @@ function renderNews() {
 
   let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[0].summary}`);
   $newsBoxContainer.append($newsSummary);
+
+  //! Rendering images to not ask API all the time
+  for (i = 0; i < 12; i++) {
+    $topContainer.append($newsBoxContainer);
+    let $newsPhoto = $("<div>").html(`<img src="/photos/tem-photos-${i}>`);
+    //! Disable above, enable below
+    // let $newsPhoto = $("<div>").html(`<img src="${newsArray[i].image_url}">`);
+    $newsBoxContainer.append($newsPhoto);
+  }
 }
+
+// -----------------------------------------------------
+// Just checking the photos oun
+// -----------------------------------------------------
+
+function loadAllPhotos() {}
+
+// console.log(data.results[3]);
+
 // -----------------------------------------------------
 // Running Code
 // -----------------------------------------------------
 
 // Default Load
-// getNews();
+getNews();
 
 // Testing Area-----------------------
 
