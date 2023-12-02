@@ -1,24 +1,28 @@
-# Project Name
+# Launchpad - Space News
 
 ### By Hojoon Kim
 
-DEPLYOYED SITE: [Click Here](https://sealproject1.vercel.app/)
+DEPLYOYED SITE: [Click Here](https://seal-project1-dusky.vercel.app/)
 
 ## Project Description
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam placerat vel metus vel bibendum. Morbi tempus, magna a feugiat sagittis, urna velit vulputate nunc, sed venenatis dolor mi at orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi tempor a tellus quis eleifend
+> This project uses the Spaceflight News API to show tiles of the latest news related to space exploration. The user can also search with keywords.
 
 ## Details about the API
 
-Brief Description of the API I'm using and how I plan to use it. Does it use authentication?
+The API does not use any authentication. The requests will be made with a URL in accordance to their API guidelines
 
 Sample Fetch/Ajax called:
 
 ```js
-const url = "https://www.perfumeapi.com/ingredients";
-fetch(url)
-  .then((res) => res.json())
-  .then((data) => console.log(data));
+const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
+  fetch(url)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      newsArray = data.results;
+    }
 ```
 
 The Data I get back:
@@ -29,7 +33,44 @@ The Data I get back:
     "ingredient": "Bergamot",
     "description": "A citrus fruit with a bright, uplifting scent."
   },
-  {
+]
+
+events
+:
+[]
+featured
+:
+false
+id
+:
+21687
+image_url
+:
+"https://spacenews.com/wp-content/uploads/2023/12/231130-X-FC312-0001-300x239.jpg"
+launches
+:
+[]
+news_site
+:
+"SpaceNews"
+published_at
+:
+"2023-12-02T13:34:11Z"
+summary
+:
+"Canada is the first international partner to access the U.S. Mobile User Objective System (MUOS) satellite network, the U.S. Space Force announced Nov. 30."
+title
+:
+"Canada taps into U.S. military satellites for mobile communications"
+updated_at
+:
+"2023-12-02T13:39:15.410000Z"
+url
+:
+"https://spacenews.com/canada-taps-into-u-s-military-satellites-for-mobile-communications/"
+
+
+[{
     "ingredient": "Lavender",
     "description": "A flowering plant with a calming, relaxing scent."
   },

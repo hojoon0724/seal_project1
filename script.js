@@ -3,6 +3,7 @@
 // -----------------------------------------------------
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
+const $topContainer = $(".top-container");
 let limitOfArticlesAmount = 12;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = [];
@@ -11,30 +12,40 @@ let newsArray = [];
 const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 
 // Fetch the stuff
+
 function getNews() {
   fetch(url)
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(`SHOW "DATA.RESULTS" ${data.results}`);
       newsArray = data.results;
-      //   console.log(`print array ${newsArray[0].title}`);
       renderNews();
+      console.log(data);
     });
 }
 
 // Rendering to the screen
 function renderNews() {
-  console.log(`title: ${newsArray[0].title}`);
-  console.log(`url: ${newsArray[0].url}`);
-  console.log(`news_site: ${newsArray[0].news_site}`);
-  console.log(`summary: ${newsArray[0].summary}`);
+  let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
+  $topContainer.append($newsBoxContainer);
+
+  let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[0].title}`);
+  $newsBoxContainer.append($newsTitle);
+
+  let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[0].news_site}`);
+  $newsBoxContainer.append($newsSite);
+
+  let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[0].summary}`);
+  $newsBoxContainer.append($newsSummary);
 }
 // -----------------------------------------------------
 // Running Code
 // -----------------------------------------------------
 
-getNews();
+// Default Load
+// getNews();
+
+// Testing Area-----------------------
+
+// Testing Area-----------------------
