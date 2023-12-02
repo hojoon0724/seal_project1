@@ -59,13 +59,13 @@ Here put a mix of text explanation plus a picture giving us an idea of the layou
 
 ## Schedule of Work
 
-| Day  | Goal                                 | What I did accomplish |
-| ---- | ------------------------------------ | --------------------- |
-| Sat  | Create Readme, Deploy, Get Approval  |                       |
-| Sun  | Build fetch of data in JS file       |                       |
-| Mon  | Render data from API on screen       |                       |
-| Tues | Build form for user to interact with |                       |
-| Wed  | wrap up functionality                |                       |
-| Thu  | mobile layout styling                |                       |
-| Fri  | Desktop layout styling               |                       |
-| Sat  | Present Project                      |                       |
+| Day  | Goal                                 | What I did accomplish                                                                                    |
+| ---- | ------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Sat  | Create Readme, Deploy, Get Approval  | API test: successful; jQuery render: successful; Deployment Test: successful Project Approval: Confirmed |
+| Sun  | Build fetch of data in JS file       |                                                                                                          |
+| Mon  | Render data from API on screen       |                                                                                                          |
+| Tues | Build form for user to interact with |                                                                                                          |
+| Wed  | wrap up functionality                |                                                                                                          |
+| Thu  | mobile layout styling                |                                                                                                          |
+| Fri  | Desktop layout styling               |                                                                                                          |
+| Sat  | Present Project                      |                                                                                                          |
