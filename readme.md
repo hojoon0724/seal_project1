@@ -51,11 +51,15 @@ Here put a mix of text explanation plus a picture giving us an idea of the layou
 
 #### Desktop View
 
-![My Desktop View](https://i.imgur.com/5Bs7N6B.png)
+![My Desktop View](https://i.imgur.com/ONwnvr7.png)
+
+#### Tablet View
+
+![My Mobile View](https://i.imgur.com/oU2ASB7.png)
 
 #### Mobile View
 
-![My Mobile View](https://i.imgur.com/5Bs7N6B.png)
+![My Mobile View](https://i.imgur.com/Yb3PMEK.png)
 
 ## Schedule of Work
 
