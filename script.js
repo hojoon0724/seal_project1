@@ -15,7 +15,7 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 
 function getNews() {
   //! Change it back to "url" when it's for realz
-  fetch("/api-response-placeholder.json")
+  fetch(url)
     .then((res) => {
       return res.json();
     })
@@ -23,40 +23,38 @@ function getNews() {
       newsArray = data.results;
       renderNews();
       console.log(data.results);
-
-      console.log(data.results[2].image_url);
     });
 }
 
 // Rendering to the screen
 function renderNews() {
-  let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
-  $topContainer.append($newsBoxContainer);
-
-  let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[0].title}`);
-  $newsBoxContainer.append($newsTitle);
-
-  let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[0].news_site}`);
-  $newsBoxContainer.append($newsSite);
-
-  let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[0].summary}`);
-  $newsBoxContainer.append($newsSummary);
-
-  //! Rendering images to not ask API all the time
-  for (i = 0; i < 12; i++) {
+  for (i = 0; i < newsArray.length; i++) {
+    let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
     $topContainer.append($newsBoxContainer);
-    let $newsPhoto = $("<div>").html(`<img src="/photos/tem-photos-${i}>`);
-    //! Disable above, enable below
-    // let $newsPhoto = $("<div>").html(`<img src="${newsArray[i].image_url}">`);
-    $newsBoxContainer.append($newsPhoto);
-  }
-}
 
+    let $newsPhotoContainer = $("<div>").attr("class", "news-photo");
+    console.log(newsArray[i].image_url);
+    $newsPhotoContainer.html(`<img src="${newsArray[i].image_url}"`);
+    $newsBoxContainer.append($newsPhotoContainer);
+
+    let $newsTextContainer = $("<div>").attr("class", "news-text-container");
+    $newsBoxContainer.append($newsTextContainer);
+
+    let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
+    $newsTextContainer.append($newsTitle);
+
+    let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
+    $newsTextContainer.append($newsSite);
+
+    let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
+    $newsTextContainer.append($newsSummary);
+  }
+  console.log(newsArray[1].image_url);
+}
+// console.log(newsArray[1].image_url);
 // -----------------------------------------------------
 // Just checking the photos oun
 // -----------------------------------------------------
-
-function loadAllPhotos() {}
 
 // console.log(data.results[3]);
 
