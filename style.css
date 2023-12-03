@@ -103,7 +103,7 @@ main {
 .news-time {
   font-family: "DM Mono";
   font-size: 8pt;
-  text-shadow: 0px 0px 2px black;
+  text-shadow: 0px 0px 3px black;
 }
 
 .news-title {
@@ -116,7 +116,7 @@ main {
   border-radius: 8px;
   box-sizing: content-box;
   font-size: 12pt;
-  text-shadow: 0px 0px 10px 2px black;
+  text-shadow: 0px 0px 3px black;
 }
 
 .news-summary {
