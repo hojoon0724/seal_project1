@@ -16,8 +16,8 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 function getNews() {
   //! Change it back to "url" when it's for realz
   // "/api-response-placeholder.json"
-  // fetch("/api-response-placeholder.json")
-  fetch(url)
+  fetch("/api-response-placeholder.json")
+    // fetch(url)
     .then((res) => {
       return res.json();
     })
@@ -86,3 +86,22 @@ getNews();
 // Testing Area-----------------------
 
 // Testing Area-----------------------
+
+// -----------------------------------------------------
+// CSS DOM Manipulation
+// -----------------------------------------------------
+
+// Fade out Title when searching
+let $mobileWidth = $(window).width();
+const $titleContainer = $(".title-container");
+const $search = $(".search");
+
+$search.on("click", fadeTitleInMobileWhenSearching());
+
+function fadeTitleInMobileWhenSearching() {
+  console.log("clicked", $mobileWidth);
+  if ($mobileWidth < 786) {
+    $search.on("focus", (event) => $titleContainer.css("opacity", 0));
+    $search.on("blur", (event) => $titleContainer.css("opacity", 1));
+  }
+}
