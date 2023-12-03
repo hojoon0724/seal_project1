@@ -4,7 +4,7 @@
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
 const $topContainer = $(".top-container");
-let limitOfArticlesAmount = 6;
+let limitOfArticlesAmount = 12;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = [];
 
@@ -15,7 +15,9 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 
 function getNews() {
   //! Change it back to "url" when it's for realz
-  fetch("/api-response-placeholder.json")
+  // "/api-response-placeholder.json"
+  // fetch("/api-response-placeholder.json")
+  fetch(url)
     .then((res) => {
       return res.json();
     })
@@ -43,19 +45,28 @@ function renderNews() {
     let $newsTextContainer = $("<div>").attr("class", "news-text-container");
     $newsBoxContainer.append($newsTextContainer);
 
+    let $photoOverlay = $("<div>").attr("class", "photo-overlay");
+    $newsBoxContainer.append($photoOverlay);
+
+    // Text Top+Bottom Sections
+    let $newsTextTop = $("<div>").attr("class", "news-text-top-container");
+    $newsTextContainer.append($newsTextTop);
+    let $newsTextBottom = $("<div>").attr("class", "news-text-bottom-container");
+    $newsTextContainer.append($newsTextBottom);
+
     // Actual Content
     let $newsPublishDate = $();
     let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
-    $newsTextContainer.append($newsTime);
+    $newsTextBottom.append($newsTime);
 
     let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
-    $newsTextContainer.append($newsTitle);
+    $newsTextBottom.append($newsTitle);
 
     let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
-    $newsTextContainer.append($newsSummary);
+    $newsTextBottom.append($newsSummary);
 
     let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
-    $newsTextContainer.append($newsSite);
+    $newsTextTop.append($newsSite);
   }
 }
 // console.log(newsArray[1].image_url);
