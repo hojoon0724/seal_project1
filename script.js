@@ -4,7 +4,7 @@
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
 const $topContainer = $(".top-container");
-let limitOfArticlesAmount = 3;
+let limitOfArticlesAmount = 6;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = [];
 
@@ -51,11 +51,11 @@ function renderNews() {
     let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
     $newsTextContainer.append($newsTitle);
 
-    let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
-    $newsTextContainer.append($newsSite);
-
     let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
     $newsTextContainer.append($newsSummary);
+
+    let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
+    $newsTextContainer.append($newsSite);
   }
 }
 // console.log(newsArray[1].image_url);
