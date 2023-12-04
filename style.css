@@ -181,6 +181,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  transition: 0.6s ease-in-out;
 }
 
 .news-source-link {
