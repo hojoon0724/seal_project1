@@ -134,13 +134,17 @@ main {
 }
 
 .news-text-top-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .news-text-bottom-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  /* justify-content: end; */
   height: 100%;
   transition: 0.6s ease-in-out;
+  position: relative;
 }
 
 .news-time {
@@ -154,6 +158,11 @@ main {
   font-size: 24pt;
   /* display: none; */
   transition: 0.6s ease-in-out;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 .news-site {
@@ -166,7 +175,12 @@ main {
 
 .news-summary {
   font-size: 18px;
-  display: none;
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 .news-source-link {

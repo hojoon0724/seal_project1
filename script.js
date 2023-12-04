@@ -58,8 +58,6 @@ function renderNews() {
 
   // Actual Content
   let $newsPublishDate = $();
-  let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
-  $newsTextBottom.append($newsTime);
 
   let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
   $newsTextBottom.append($newsTitle);
@@ -70,6 +68,9 @@ function renderNews() {
   let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
   $newsTextTop.append($newsSite);
 
+  let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
+  $newsTextTop.append($newsTime);
+
   // Click event listener
   let open = false;
   $newsBoxContainer.on("click", (event) => {
@@ -77,21 +78,21 @@ function renderNews() {
     function openNews() {
       $newsTitle.css("opacity", 0);
       // $newsTitle.css("display", "none");
-      $newsTime.css("opacity", 0);
+      // $newsTime.css("opacity", 0);
       // $newsTime.css("display", "none");
       $newsSummary.css("opacity", 1);
-      $newsSummary.css("display", "flex");
-      $newsTextBottom.css("justify-content", "center");
+      // $newsSummary.css("display", "flex");
+      // $newsTextBottom.css("justify-content", "center");
       // open = true;
     }
     function closeNews() {
       $newsTitle.css("opacity", 1);
       // $newsTitle.css("display", "flex");
-      $newsTime.css("opacity", 1);
+      // $newsTime.css("opacity", 1);
       // $newsTime.css("display", "flex");
       $newsSummary.css("opacity", 0);
       // $newsSummary.css("display", "none");
-      $newsTextBottom.css("justify-content", "end");
+      // $newsTextBottom.css("justify-content", "end");
       // open = false;
     }
     if (open) {
