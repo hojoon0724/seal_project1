@@ -136,6 +136,12 @@ main {
 .news-text-top-container {
 }
 .news-text-bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  border: 1px solid red;
+  transition: 0.6s ease-in-out;
 }
 
 .news-time {
@@ -147,6 +153,8 @@ main {
 .news-title {
   font-family: "DM Sans";
   font-size: 24pt;
+  /* display: none; */
+  transition: 0.6s ease-in-out;
 }
 
 .news-site {
@@ -158,7 +166,13 @@ main {
 }
 
 .news-summary {
-  display: none;
+  font-size: 18px;
+  /* display: none; */
+}
+
+.news-source-link {
+  background-color: #dddddd;
+  color: black;
 }
 
 @media screen and (max-width: 1023px) {
