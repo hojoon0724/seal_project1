@@ -16,8 +16,8 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 function getNews() {
   //! Change it back to "url" when it's for realz
   // "/api-response-placeholder.json"
-  fetch("/api-response-placeholder.json")
-    // fetch(url)
+  // fetch("/api-response-placeholder.json")
+  fetch(url)
     .then((res) => {
       return res.json();
     })
@@ -76,9 +76,9 @@ function renderNews() {
     open = !open;
     function openNews() {
       $newsTitle.css("opacity", 0);
-      $newsTitle.css("display", "none");
+      // $newsTitle.css("display", "none");
       $newsTime.css("opacity", 0);
-      $newsTime.css("display", "none");
+      // $newsTime.css("display", "none");
       $newsSummary.css("opacity", 1);
       $newsSummary.css("display", "flex");
       $newsTextBottom.css("justify-content", "center");
@@ -86,9 +86,12 @@ function renderNews() {
     }
     function closeNews() {
       $newsTitle.css("opacity", 1);
-      $newsTitle.css("display", "flex");
+      // $newsTitle.css("display", "flex");
+      $newsTime.css("opacity", 1);
+      // $newsTime.css("display", "flex");
       $newsSummary.css("opacity", 0);
-      $newsSummary.css("display", "none");
+      // $newsSummary.css("display", "none");
+      $newsTextBottom.css("justify-content", "end");
       // open = false;
     }
     if (open) {
