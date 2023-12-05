@@ -50,6 +50,9 @@ function renderNews() {
   let $photoOverlay = $("<div>").attr("class", "photo-overlay");
   $newsBoxContainer.append($photoOverlay);
 
+  let $fullOverlay = $("<div>").attr("class", "full-overlay");
+  $newsBoxContainer.append($fullOverlay);
+
   // Text Top+Bottom Sections
   let $newsTextTop = $("<div>").attr("class", "news-text-top-container");
   $newsTextContainer.append($newsTextTop);
@@ -57,13 +60,14 @@ function renderNews() {
   $newsTextContainer.append($newsTextBottom);
 
   // Actual Content
-  let $newsPublishDate = $();
-
   let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
   $newsTextBottom.append($newsTitle);
 
   let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
   $newsTextBottom.append($newsSummary);
+
+  let $newsSource = $("<div>").attr("class", "news-source").html(`<a href="${newsArray[i].url}"<button >Read More at<br>${newsArray[i].news_site}</button></a>`).css("margin-top", "16px");
+  $newsSummary.append($newsSource);
 
   let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
   $newsTextTop.append($newsSite);
@@ -71,29 +75,22 @@ function renderNews() {
   let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
   $newsTextTop.append($newsTime);
 
-  // Click event listener
+  //* Click event listener
+  /*
   let open = false;
   $newsBoxContainer.on("click", (event) => {
     open = !open;
     function openNews() {
       $newsTitle.css("opacity", 0);
-      // $newsTitle.css("display", "none");
-      // $newsTime.css("opacity", 0);
-      // $newsTime.css("display", "none");
       $newsSummary.css("opacity", 1);
-      // $newsSummary.css("display", "flex");
-      // $newsTextBottom.css("justify-content", "center");
-      // open = true;
+      $fullOverlay.css("opacity", 1);
+      $newsTextTop.css("opacity", 0);
     }
     function closeNews() {
       $newsTitle.css("opacity", 1);
-      // $newsTitle.css("display", "flex");
-      // $newsTime.css("opacity", 1);
-      // $newsTime.css("display", "flex");
       $newsSummary.css("opacity", 0);
-      // $newsSummary.css("display", "none");
-      // $newsTextBottom.css("justify-content", "end");
-      // open = false;
+      $fullOverlay.css("opacity", 0);
+      $newsTextTop.css("opacity", 1);
     }
     if (open) {
       openNews();
@@ -102,6 +99,21 @@ function renderNews() {
       closeNews();
       console.log(`closeNews ${open}`);
     }
+  });
+*/
+  //* Hover event listener
+  $newsBoxContainer.on("mouseenter", (event) => {
+    $newsTitle.css("opacity", 0);
+    $newsSummary.css("opacity", 1);
+    $fullOverlay.css("opacity", 1);
+    $newsTextTop.css("opacity", 0);
+  });
+
+  $newsBoxContainer.on("mouseleave", (event) => {
+    $newsTitle.css("opacity", 1);
+    $newsSummary.css("opacity", 0);
+    $fullOverlay.css("opacity", 0);
+    $newsTextTop.css("opacity", 1);
   });
 
   //   "click", (event) => {
@@ -145,7 +157,7 @@ const $search = $(".search");
 $search.on("click", fadeTitleInMobileWhenSearching());
 
 function fadeTitleInMobileWhenSearching() {
-  console.log("clicked", $mobileWidth);
+  window.onresize = $mobileWidth;
   if ($mobileWidth < 786) {
     $search.on("focus", (event) => $titleContainer.css("opacity", 0));
     $search.on("blur", (event) => $titleContainer.css("opacity", 1));

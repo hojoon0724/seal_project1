@@ -1,5 +1,12 @@
 :root {
   font-family: "DM Sans";
+  --tr-time: 0.4s ease-in-out;
+  --tr-time-fast: 0.2s ease-in-out;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 img {
@@ -26,7 +33,7 @@ footer {
 
 .title-container {
   margin: 16px;
-  transition: 0.6s;
+  transition: var(--tr-time);
 }
 
 h1 {
@@ -54,13 +61,13 @@ h1 {
   padding: 0px 12px;
   margin-right: 16px;
   margin-left: 16px;
-  transition: 0.6s ease-in-out;
+  transition: var(--tr-time);
 }
 
 .search:focus {
   width: 100%;
   margin-right: 16px;
-  transition: 0.6s ease-in-out;
+  transition: var(--tr-time);
 }
 
 body {
@@ -114,11 +121,22 @@ main {
 }
 
 .photo-overlay {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 25%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 25%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%);
   width: 100%;
   height: 100%;
   z-index: 2;
   position: absolute;
+  opacity: 1;
+  transition: var(--tr-time);
+}
+
+.full-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: var(--tr-time);
 }
 
 .news-text-container {
@@ -137,13 +155,13 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: var(--tr-time);
 }
 .news-text-bottom-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: end; */
   height: 100%;
-  transition: 0.6s ease-in-out;
+  transition: var(--tr-time);
   position: relative;
 }
 
@@ -157,7 +175,7 @@ main {
   font-family: "DM Sans";
   font-size: 24pt;
   /* display: none; */
-  transition: 0.6s ease-in-out;
+  transition: var(--tr-time);
   position: absolute;
   height: 100%;
   display: flex;
@@ -175,18 +193,44 @@ main {
 
 .news-summary {
   font-size: 18px;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  transition: 0.6s ease-in-out;
+  justify-content: center;
+  transition: var(--tr-time);
 }
 
-.news-source-link {
+.news-source-link button {
   background-color: #dddddd;
+  border: 1px solid #dddddd;
   color: black;
+  transition: var(--tr-time);
+  font-size: 8pt;
+  font-family: "DM Mono";
+  padding: 4px 8px;
+  margin-top: 16px;
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+}
+
+.news-source-link button:hover {
+  background-color: black;
+  border: 1px solid #dddddd;
+  color: #dddddd;
+  transition: var(--tr-time-fast);
+  font-size: 8pt;
+  font-family: "DM Mono";
+  padding: 4px 8px;
+  margin-top: 30%;
+  border-radius: 4px;
+
+  text-align: left;
+  cursor: pointer;
+  display: flex;
 }
 
 @media screen and (max-width: 1023px) {
@@ -244,12 +288,12 @@ main {
     border-radius: 24px;
     padding: 0px 12px;
     margin: 0px;
-    transition: 0.6s ease-in-out;
+    transition: var(--tr-time);
   }
 
   .search:focus {
     margin-right: 0px;
-    transition: 0.6s ease-in-out;
+    transition: var(--tr-time);
   }
 
   .news-box-container {
