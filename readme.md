@@ -66,8 +66,8 @@ Here put a mix of text explanation plus a picture giving us an idea of the layou
 | Day | Goal                                 | What I did accomplish                                                                           |
 | --- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | Sat | Create Readme, Deploy, Get Approval  | API test, jQuery render, Deployment Test,Readme complete, Project Approval, Initial CSS Styling |
-| Sun | Build fetch of data in JS file       |                                                                                                 |
-| Mon | Render data from API on screen       |                                                                                                 |
+| Sun | Build fetch of data in JS file       | Mobile and Tablet CSS done, event listeners added. Default feed loading and rendering.          |
+| Mon | Render data from API on screen       | Toggling between title/summary working, improved CSS, search function working.                  |
 | Tue | Build form for user to interact with |                                                                                                 |
 | Wed | wrap up functionality                |                                                                                                 |
 | Thu | mobile layout styling                |                                                                                                 |
