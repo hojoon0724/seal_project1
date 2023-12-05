@@ -47,9 +47,14 @@ function renderNews() {
   let $newsTextContainer = $("<div>").attr("class", "news-text-container");
   $newsBoxContainer.append($newsTextContainer);
 
+  let $newsDetailsAbsoluteContainer = $("<div>").attr("class", "news-details-absolute-container");
+  $newsBoxContainer.append($newsDetailsAbsoluteContainer);
+  let $newsDetailsContainer = $("<div>").attr("class", "news-details-container");
+  $newsDetailsAbsoluteContainer.append($newsDetailsContainer);
+
+  // Photo overlays
   let $photoOverlay = $("<div>").attr("class", "photo-overlay");
   $newsBoxContainer.append($photoOverlay);
-
   let $fullOverlay = $("<div>").attr("class", "full-overlay");
   $newsBoxContainer.append($fullOverlay);
 
@@ -63,11 +68,14 @@ function renderNews() {
   let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
   $newsTextBottom.append($newsTitle);
 
+  let $newsSummaryContainer = $("<div>").attr("class", "news-summary-container");
+  $newsDetailsContainer.append($newsSummaryContainer);
   let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
-  $newsTextBottom.append($newsSummary);
+  $newsSummaryContainer.append($newsSummary);
 
-  let $newsSource = $("<div>").attr("class", "news-source").html(`<a href="${newsArray[i].url}"<button >Read More at<br>${newsArray[i].news_site}</button></a>`).css("margin-top", "16px");
-  $newsSummary.append($newsSource);
+  // let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${newsArray[i].url}"><button>Read More at ${newsArray[i].news_site}</button></a>`).css("margin-top", "16px");
+  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${newsArray[i].url}"><button>Full Article</button></a>`);
+  $newsDetailsContainer.append($newsSource);
 
   let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
   $newsTextTop.append($newsSite);
