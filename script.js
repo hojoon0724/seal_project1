@@ -10,14 +10,15 @@ let newsArray = [];
 
 // URL assembly
 const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
+// const urlManual = `${baseURL}?search=spacex&${limitOfArticles}&${fileFormatRequested}`
 
 // Fetch the stuff
 
 function getNews() {
   //! Change it back to "url" when it's for realz
   // "/api-response-placeholder.json"
-  fetch("/api-response-placeholder.json")
-    // fetch(url)
+  fetch("/api-response-placeholder.json");
+  fetch(url)
     .then((res) => {
       return res.json();
     })
@@ -28,7 +29,39 @@ function getNews() {
       }
 
       console.log(data.results);
+      console.log(url);
     });
+}
+
+function searchNews(input) {
+  //! Change it back to "url" when it's for realz
+  // "/api-response-placeholder.json"
+  // fetch("/api-response-placeholder.json")
+  const searchURL = `${baseURL}?search=${input}&${limitOfArticles}&${fileFormatRequested}`;
+  fetch(searchURL)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      newsArray = data.results;
+      for (i = 0; i < limitOfArticlesAmount; i++) {
+        renderNews();
+      }
+
+      console.log(data.results);
+      console.log(searchURL);
+    });
+}
+
+function searchEvent(event) {
+  event.preventDefault();
+  $topContainer.empty();
+  const form = event.target;
+  const formData = new FormData(form);
+  const userSearch = formData.get("user-input");
+  console.log(userSearch);
+  searchNews(userSearch);
+  renderNews();
 }
 
 // Rendering to the screen
@@ -112,14 +145,14 @@ function renderNews() {
   //* Hover event listener
   $newsBoxContainer.on("mouseenter", (event) => {
     $newsTitle.css("opacity", 0);
-    $newsSummary.css("opacity", 1);
+    $newsDetailsAbsoluteContainer.css("opacity", 1);
     $fullOverlay.css("opacity", 1);
     $newsTextTop.css("opacity", 0);
   });
 
   $newsBoxContainer.on("mouseleave", (event) => {
     $newsTitle.css("opacity", 1);
-    $newsSummary.css("opacity", 0);
+    $newsDetailsAbsoluteContainer.css("opacity", 0);
     $fullOverlay.css("opacity", 0);
     $newsTextTop.css("opacity", 1);
   });
@@ -171,3 +204,5 @@ function fadeTitleInMobileWhenSearching() {
     $search.on("blur", (event) => $titleContainer.css("opacity", 1));
   }
 }
+
+document.querySelector("form").addEventListener("submit", searchEvent);
