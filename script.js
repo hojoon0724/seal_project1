@@ -17,7 +17,7 @@ const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
 function getNews() {
   //! Change it back to "url" when it's for realz
   // "/api-response-placeholder.json"
-  fetch("/api-response-placeholder.json");
+  // fetch("/api-response-placeholder.json");
   fetch(url)
     .then((res) => {
       return res.json();
@@ -43,6 +43,7 @@ function searchNews(input) {
       return res.json();
     })
     .then((data) => {
+      console.log(data.results);
       newsArray = data.results;
       for (i = 0; i < limitOfArticlesAmount; i++) {
         renderNews();
@@ -61,7 +62,7 @@ function searchEvent(event) {
   const userSearch = formData.get("user-input");
   console.log(userSearch);
   searchNews(userSearch);
-  renderNews();
+  // renderNews();
 }
 
 // Rendering to the screen
