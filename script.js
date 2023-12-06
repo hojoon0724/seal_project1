@@ -2,38 +2,48 @@
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
 const $topContainer = $(".top-container");
-let limitOfArticlesAmount = 12;
+let limitOfArticlesAmount = 24;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
-let newsArray = [];
+let newsArray = {};
+let pageMultiplier = 1;
+let offsetValue = limitOfArticlesAmount * pageMultiplier;
+let count = 0;
 
 // URL assembly
-const url = `${baseURL}?${limitOfArticles}&${fileFormatRequested}`;
+let url = `${baseURL}?&${fileFormatRequested}&${limitOfArticles}`;
 
 // Fetch the stuff
 function getNews() {
+  // fetch("/api-response-placeholder.json")
   fetch(url)
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      newsArray = data.results;
+      newsArray = data;
+      // count = data.count;
       for (i = 0; i < limitOfArticlesAmount; i++) {
-        renderNews();
+        renderNews(data);
       }
+      renderPagination(data);
+      console.log(url);
     });
 }
 
 function searchNews(input) {
-  const searchURL = `${baseURL}?search=${input}&${limitOfArticles}&${fileFormatRequested}`;
-  fetch(searchURL)
+  url = `${url}&search=${input}`;
+  fetch(url)
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      newsArray = data.results;
+      count = data.count;
+      newsArray = data;
       for (i = 0; i < limitOfArticlesAmount; i++) {
-        renderNews();
+        renderNews(data);
       }
+      renderPagination(data);
+      console.log(url);
     });
 }
 
@@ -46,14 +56,14 @@ function searchEvent(event) {
   searchNews(userSearch);
 }
 
-function renderNews() {
+function renderNews(res) {
   // Make tile
   let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
   $topContainer.append($newsBoxContainer);
 
   // Get photo
   let $newsPhotoContainer = $("<div>").attr("class", "news-photo");
-  $newsPhotoContainer.html(`<img src="${newsArray[i].image_url}">`);
+  $newsPhotoContainer.html(`<img src="${res.results[i].image_url}">`);
   $newsBoxContainer.append($newsPhotoContainer);
 
   // Text Containers
@@ -79,15 +89,15 @@ function renderNews() {
   $newsBoxContainer.append($fullOverlay);
 
   // Text
-  let $newsTitle = $("<div>").attr("class", "news-title").text(`${newsArray[i].title}`);
+  let $newsTitle = $("<div>").attr("class", "news-title").text(`${res.results[i].title}`);
   $newsTextBottom.append($newsTitle);
-  let $newsSummary = $("<div>").attr("class", "news-summary").text(`${newsArray[i].summary}`);
+  let $newsSummary = $("<div>").attr("class", "news-summary").text(`${res.results[i].summary}`);
   $newsSummaryContainer.append($newsSummary);
-  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${newsArray[i].url}"><button>Full Article</button></a>`);
+  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${res.results[i].url}"><button>Full Article</button></a>`);
   $newsDetailsContainer.append($newsSource);
-  let $newsSite = $("<div>").attr("class", "news-site").text(`${newsArray[i].news_site}`);
+  let $newsSite = $("<div>").attr("class", "news-site").text(`${res.results[i].news_site}`);
   $newsTextTop.append($newsSite);
-  let $newsTime = $("<div>").attr("class", "news-time").text(`${newsArray[i].published_at}`);
+  let $newsTime = $("<div>").attr("class", "news-time").text(`${res.results[i].published_at}`);
   $newsTextTop.append($newsTime);
 
   // Hover event listener
@@ -107,7 +117,7 @@ function renderNews() {
 }
 
 // Default Load the Latest
-getNews();
+// getNews();
 
 // Fade out Title when searching in mobile
 let $mobileWidth = $(window).width();
@@ -124,3 +134,21 @@ function fadeTitleInMobileWhenSearching() {
 
 // Search event listener
 document.querySelector("form").addEventListener("submit", searchEvent);
+
+// Create page number+buttons
+
+function renderPagination(data) {
+  const $pagesContainer = $(".pages-container");
+  $pagesContainer.empty();
+  let $pageControllerContainer = $("<div>").attr("class", "page-controller-container");
+  $pagesContainer.append($pageControllerContainer);
+  let pagesAmount = Math.ceil(data.count / limitOfArticlesAmount);
+
+  for (p = 1; p <= pagesAmount; p++) {
+    let pagedOffset = limitOfArticlesAmount * (p - 1);
+    let pagedURL = `<a href="${url}&offset=${pagedOffset}">`;
+    let $pageNumber = $("<div>").attr("class", "page-number").html(`<a href="">Page:${p} offset: ${pagedOffset}</a>`);
+    $pageControllerContainer.append($pageNumber);
+    console.log(pagedURL);
+  }
+}

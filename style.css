@@ -253,6 +253,27 @@ main {
   transition: var(--tr-time-fast);
 }
 
+.pages-container {
+  width: 100%;
+}
+
+.page-controller-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.page-number {
+  display: flex;
+  padding: 8px;
+  border-radius: 16px;
+  margin: 16px;
+  background-color: white;
+  color: black;
+  min-width: 2ch;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1023px) {
   .form-container {
     width: 50vw;
