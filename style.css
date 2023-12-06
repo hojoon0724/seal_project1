@@ -9,11 +9,6 @@ a {
   text-decoration: none;
 }
 
-img {
-  /* max-width: 100%;
-  max-height: 100%; */
-}
-
 header {
   background-color: #1f1f1f;
 }
@@ -266,8 +261,6 @@ main {
   .search:focus {
     width: 100%;
   }
-  body {
-  }
   .news-box-container {
     width: calc((100% - 16px) / 2);
     margin-right: 16px;
@@ -285,9 +278,6 @@ main {
 }
 
 @media screen and (max-width: 767px) {
-  body {
-  }
-
   .top-bar {
     width: 100%;
     text-align: left;
