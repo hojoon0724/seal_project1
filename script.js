@@ -2,6 +2,7 @@
 const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 const fileFormatRequested = "format=json";
 const $topContainer = $(".top-container");
+const $pagesContainer = $(".pages-container");
 let limitOfArticlesAmount = 24;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = {};
@@ -32,24 +33,13 @@ function getNews() {
 
 function searchNews(input) {
   url = `${url}&search=${input}`;
-  fetch(url)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      count = data.count;
-      newsArray = data;
-      for (i = 0; i < limitOfArticlesAmount; i++) {
-        renderNews(data);
-      }
-      renderPagination(data);
-      console.log(url);
-    });
+  getNews();
 }
 
 function searchEvent(event) {
   event.preventDefault();
   $topContainer.empty();
+  $pagesContainer.empty();
   const form = event.target;
   const formData = new FormData(form);
   const userSearch = formData.get("user-input");
@@ -117,7 +107,7 @@ function renderNews(res) {
 }
 
 // Default Load the Latest
-// getNews();
+//! getNews();
 
 // Fade out Title when searching in mobile
 let $mobileWidth = $(window).width();
@@ -138,8 +128,6 @@ document.querySelector("form").addEventListener("submit", searchEvent);
 // Create page number+buttons
 
 function renderPagination(data) {
-  const $pagesContainer = $(".pages-container");
-  $pagesContainer.empty();
   let $pageControllerContainer = $("<div>").attr("class", "page-controller-container");
   $pagesContainer.append($pageControllerContainer);
   let pagesAmount = Math.ceil(data.count / limitOfArticlesAmount);
@@ -147,8 +135,12 @@ function renderPagination(data) {
   for (p = 1; p <= pagesAmount; p++) {
     let pagedOffset = limitOfArticlesAmount * (p - 1);
     let pagedURL = `<a href="${url}&offset=${pagedOffset}">`;
-    let $pageNumber = $("<div>").attr("class", "page-number").html(`<a href="">Page:${p} offset: ${pagedOffset}</a>`);
+    let $pageNumber = $("<div>").attr("class", "page-number").text(p);
     $pageControllerContainer.append($pageNumber);
+    $pageNumber.on("click", (event) => {
+      const $target = $(event.target);
+      console.log($target[0].innerText);
+    });
     console.log(pagedURL);
   }
 }
