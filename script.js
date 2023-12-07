@@ -6,9 +6,6 @@ const $pagesContainer = $(".pages-container");
 let limitOfArticlesAmount = 24;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
 let newsArray = {};
-let pageMultiplier = 1;
-let offsetValue = limitOfArticlesAmount * pageMultiplier;
-let count = 0;
 
 // URL assembly
 let url = `${baseURL}?&${fileFormatRequested}&${limitOfArticles}`;
@@ -44,6 +41,15 @@ function searchEvent(event) {
   const formData = new FormData(form);
   const userSearch = formData.get("user-input");
   searchNews(userSearch);
+}
+
+function goToPage(input) {
+  window.scrollTo(0, 0);
+  $topContainer.empty();
+  $pagesContainer.empty();
+  let offsetAmount = input * limitOfArticlesAmount;
+  url = `${url}&offset=${offsetAmount}`;
+  getNews();
 }
 
 function renderNews(res) {
@@ -83,7 +89,7 @@ function renderNews(res) {
   $newsTextBottom.append($newsTitle);
   let $newsSummary = $("<div>").attr("class", "news-summary").text(`${res.results[i].summary}`);
   $newsSummaryContainer.append($newsSummary);
-  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${res.results[i].url}"><button>Full Article</button></a>`);
+  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${res.results[i].url}" target=”_blank"><button>Full Article</button></a>`);
   $newsDetailsContainer.append($newsSource);
   let $newsSite = $("<div>").attr("class", "news-site").text(`${res.results[i].news_site}`);
   $newsTextTop.append($newsSite);
@@ -107,7 +113,7 @@ function renderNews(res) {
 }
 
 // Default Load the Latest
-//! getNews();
+getNews();
 
 // Fade out Title when searching in mobile
 let $mobileWidth = $(window).width();
@@ -131,16 +137,39 @@ function renderPagination(data) {
   let $pageControllerContainer = $("<div>").attr("class", "page-controller-container");
   $pagesContainer.append($pageControllerContainer);
   let pagesAmount = Math.ceil(data.count / limitOfArticlesAmount);
-
-  for (p = 1; p <= pagesAmount; p++) {
-    let pagedOffset = limitOfArticlesAmount * (p - 1);
-    let pagedURL = `<a href="${url}&offset=${pagedOffset}">`;
-    let $pageNumber = $("<div>").attr("class", "page-number").text(p);
+  if (pagesAmount <= 10) {
+    for (p = 1; p <= pagesAmount; p++) {
+      let $pageNumber = $("<div>").attr("class", "page-number").text(p);
+      $pageControllerContainer.append($pageNumber);
+      $pageNumber.on("click", (event) => {
+        const $target = $(event.target);
+        // this gets you the content of the page number
+        console.log($target[0].innerText);
+        goToPage($target[0].innerText);
+      });
+    }
+  } else {
+    for (p = 1; p <= 10; p++) {
+      let $pageNumber = $("<div>").attr("class", "page-number").text(p);
+      $pageControllerContainer.append($pageNumber);
+      $pageNumber.on("click", (event) => {
+        const $target = $(event.target);
+        // this gets you the content of the page number
+        console.log($target[0].innerText);
+        goToPage($target[0].innerText);
+      });
+    }
+    let $pageNumberSeparator = $("<div>").addClass("separator").text("•••");
+    $pageControllerContainer.append($pageNumberSeparator);
+    let $pageNumber = $("<div>")
+      .addClass("page-number")
+      .text(pagesAmount - 1);
     $pageControllerContainer.append($pageNumber);
     $pageNumber.on("click", (event) => {
       const $target = $(event.target);
+      // this gets you the content of the page number
       console.log($target[0].innerText);
+      goToPage($target[0].innerText);
     });
-    console.log(pagedURL);
   }
 }

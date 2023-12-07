@@ -273,6 +273,19 @@ main {
   min-width: 2ch;
   justify-content: center;
 }
+.page-number:hover {
+  cursor: pointer;
+}
+
+.separator {
+  display: flex;
+  padding: 8px;
+  border-radius: 16px;
+  margin: 16px;
+  color: white;
+  min-width: 2ch;
+  justify-content: center;
+}
 
 @media screen and (max-width: 1023px) {
   .form-container {
@@ -295,6 +308,12 @@ main {
   }
   .news-box-container:nth-child(2n) {
     margin-right: 0px;
+  }
+  .page-number,
+  .separator {
+    margin: 1%;
+    padding: 1%;
+    font-size: 85%;
   }
 }
 
