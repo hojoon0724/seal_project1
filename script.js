@@ -31,6 +31,15 @@ function searchNews(input) {
   getNews();
 }
 
+function goToPage(input) {
+  window.scrollTo(0, 0);
+  $topContainer.empty();
+  $pagesContainer.empty();
+  let offsetAmount = input * limitOfArticlesAmount;
+  url = `${url}&offset=${offsetAmount}`;
+  getNews();
+}
+
 function searchEvent(event) {
   event.preventDefault();
   $topContainer.empty();
@@ -39,15 +48,6 @@ function searchEvent(event) {
   const formData = new FormData(form);
   const userSearch = formData.get("user-input");
   searchNews(userSearch);
-}
-
-function goToPage(input) {
-  window.scrollTo(0, 0);
-  $topContainer.empty();
-  $pagesContainer.empty();
-  let offsetAmount = input * limitOfArticlesAmount;
-  url = `${url}&offset=${offsetAmount}`;
-  getNews();
 }
 
 function renderNews(res) {
