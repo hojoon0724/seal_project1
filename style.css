@@ -2,6 +2,11 @@
   font-family: "DM Sans";
   --tr-time: 0.4s ease-in-out;
   --tr-time-fast: 0.2s ease-in-out;
+  --black: #1f1f1f;
+  --dark-gray: #444444;
+  --gray: #666666;
+  --light-gray: #999999;
+  --white: #dddddd;
 }
 
 a {
@@ -10,7 +15,7 @@ a {
 }
 
 header {
-  background-color: #1f1f1f;
+  background-color: var(--black);
 }
 
 footer {
@@ -90,7 +95,7 @@ main {
   margin-right: 16px;
   margin-bottom: 18px;
   border-radius: 24px;
-  border: 0px solid white;
+  border: 0px solid var(--white);
   overflow: hidden;
   aspect-ratio: 5 / 5;
   position: relative;
@@ -233,9 +238,9 @@ main {
   position: absolute;
 }
 .news-source-link button {
-  background-color: #dddddd;
-  border: 1px solid #dddddd;
-  color: black;
+  background-color: var(--white);
+  border: 1px solid var(--white);
+  color: var(--black);
   transition: var(--tr-time);
   font-size: 8pt;
   font-family: "DM Mono";
@@ -247,9 +252,9 @@ main {
 }
 
 .news-source-link button:hover {
-  background-color: black;
-  border: 1px solid #dddddd;
-  color: #dddddd;
+  background-color: var(--black);
+  border: 1px solid var(--white);
+  color: var(--white);
   transition: var(--tr-time-fast);
 }
 
@@ -268,8 +273,8 @@ main {
   padding: 8px;
   border-radius: 16px;
   margin: 16px;
-  background-color: white;
-  color: black;
+  background-color: var(--dark-gray);
+  color: var(--light-gray);
   min-width: 2ch;
   justify-content: center;
 }
@@ -282,7 +287,7 @@ main {
   padding: 8px;
   border-radius: 16px;
   margin: 16px;
-  color: white;
+  color: var(--light-gray);
   min-width: 2ch;
   justify-content: center;
 }
@@ -300,7 +305,6 @@ main {
     margin-right: 16px;
     margin-bottom: 18px;
     border-radius: 24px;
-    border: 0px solid white;
     overflow: hidden;
     aspect-ratio: 5 / 5;
     position: relative;
@@ -356,7 +360,6 @@ main {
     margin-right: 0px;
     margin-bottom: 18px;
     border-radius: 24px;
-    border: 0px solid white;
     overflow: hidden;
     aspect-ratio: 5 / 5;
     position: relative;
