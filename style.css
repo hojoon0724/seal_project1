@@ -219,6 +219,7 @@ main {
   display: flex;
   align-items: center;
   position: absolute;
+  z-index: 7;
 }
 
 .news-summary {
@@ -226,7 +227,7 @@ main {
   opacity: 1;
   max-height: calc(100% - 48px);
   transition: var(--tr-time);
-  overflow: hidden;
+  overflow: scroll;
 }
 .news-source-link {
   width: 100%;
@@ -277,9 +278,19 @@ main {
   color: var(--light-gray);
   min-width: 2ch;
   justify-content: center;
+  transition: var(--tr-time-fast);
 }
 .page-number:hover {
+  background-color: var(--white);
+  color: var(--black);
   cursor: pointer;
+  transition: var(--tr-time-fast);
+}
+.page-number:active {
+  background-color: var(--white);
+  color: var(--black);
+  cursor: pointer;
+  transition: var(--tr-time-fast);
 }
 
 .separator {

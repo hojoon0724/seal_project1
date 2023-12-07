@@ -5,7 +5,7 @@ const $topContainer = $(".top-container");
 const $pagesContainer = $(".pages-container");
 let limitOfArticlesAmount = 24;
 const limitOfArticles = `limit=${limitOfArticlesAmount}`;
-let newsArray = {};
+let currentPage = 1;
 
 // URL assembly
 let url = `${baseURL}?&${fileFormatRequested}&${limitOfArticles}`;
@@ -18,8 +18,6 @@ function getNews() {
       return res.json();
     })
     .then((data) => {
-      newsArray = data;
-      // count = data.count;
       for (i = 0; i < limitOfArticlesAmount; i++) {
         renderNews(data);
       }
@@ -146,6 +144,7 @@ function renderPagination(data) {
         // this gets you the content of the page number
         console.log($target[0].innerText);
         goToPage($target[0].innerText);
+        // makePagesButtons(pagesAmount);
       });
     }
   } else {
@@ -167,9 +166,21 @@ function renderPagination(data) {
     $pageControllerContainer.append($pageNumber);
     $pageNumber.on("click", (event) => {
       const $target = $(event.target);
-      // this gets you the content of the page number
+      $target.attr("class", ".page-number:active");
       console.log($target[0].innerText);
+      currentPage = $target[0].innerText;
       goToPage($target[0].innerText);
     });
   }
+}
+
+function makePagesButtons(num) {
+  let $pageNumber = $("<div>").attr("class", "page-number").text(num);
+  $pageControllerContainer.append($pageNumber);
+  $pageNumber.on("click", (event) => {
+    const $target = $(event.target);
+    // this gets you the content of the page number
+    console.log($target[0].innerText);
+    goToPage($target[0].innerText);
+  });
 }

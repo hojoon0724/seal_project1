@@ -28,22 +28,31 @@ const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
 The Data I get back:
 
 ```json
-[
-  {
-    "events": "[]",
-    "featured": "false",
-    "id": "21687",
-    "image_url": "https://spacenews.com/wp-content/uploads/2023/12/231130-X-FC312-0001-300x239.jpg",
-    "launches": "[]",
-    "news_site": "SpaceNews",
-    "published_at": "2023-12-02T13:34:11Z",
-    "summary": "Canada is the first international partner to access the U.S. Mobile User Objective System (MUOS) satellite network, the U.S. Space Force announced Nov. 30.",
-    "title": "Canada taps into U.S. military satellites for mobile communications",
-    "updated_at": "2023-12-02T13:39:15.410000Z",
-    "url": "https://spacenews.com/canada-taps-into-u-s-military-satellites-for-mobile-communications/"
-  }
-]
-```
+{
+    "count": 18728,
+    "next": "https://api.spaceflightnewsapi.net/v4/articles/?format=json&limit=24&offset=24",
+    "previous": null,
+    "results": [
+      {
+        "id": 21730,
+        "title": "NorthStar raises $15 million for debris-tracking satellites waiting on Rocket Lab",
+        "url": "https://spacenews.com/northstar-raises-15-million-for-debris-tracking-satellites-waiting-on-rocket-lab/",
+        "image_url": "https://i0.wp.com/spacenews.com/wp-content/uploads/2022/03/ses-northstar.jpg",
+        "news_site": "SpaceNews",
+        "summary": "WASHINGTON — NorthStar Earth and Space has raised another $15 million to support its first four satellites for tracking objects in orbit, the Canadian company said Dec. 6 as it waits on Rocket Lab to get back to flight so they can launch on a future mission.",
+        "published_at": "2023-12-06T19:38:06Z",
+        "updated_at": "2023-12-06T19:39:15.735000Z",
+        "featured": false,
+        "launches": [
+
+        ],
+        "events": [
+
+        ]
+      },
+    ]
+}
+``
 
 ## Mockup
 
@@ -69,7 +78,8 @@ Here put a mix of text explanation plus a picture giving us an idea of the layou
 | Sun | Build fetch of data in JS file       | Mobile and Tablet CSS done, event listeners added. Default feed loading and rendering.          |
 | Mon | Render data from API on screen       | Toggling between title/summary working, improved CSS, search function working.                  |
 | Tue | Build form for user to interact with | Cleaned up JS, better CSS                                                                       |
-| Wed | wrap up functionality                |                                                                                                 |
+| Wed | wrap up functionality                | Added limited pagination function/interface, summary overflow scrolls, API URL consolidated     |
 | Thu | mobile layout styling                |                                                                                                 |
 | Fri | Desktop layout styling               |                                                                                                 |
 | Sat | Present Project                      |                                                                                                 |
+```
