@@ -1,186 +1,223 @@
 // Base elements
-const baseURL = "https://api.spaceflightnewsapi.net/v4/articles/";
-const fileFormatRequested = "format=json";
-const $topContainer = $(".top-container");
-const $pagesContainer = $(".pages-container");
-let limitOfArticlesAmount = 24;
-const limitOfArticles = `limit=${limitOfArticlesAmount}`;
-let currentPage = 1;
+const baseURL = 'https://api.spaceflightnewsapi.net/v4/articles/'
+const fileFormatRequested = 'format=json'
+const $topContainer = $('.top-container')
+const $pagesContainer = $('.pages-container')
+let limitOfArticlesAmount = 24
+const limitOfArticles = `limit=${limitOfArticlesAmount}`
+let currentPage = 1
+let localObject = {}
 
 // URL assembly
-let url = `${baseURL}?&${fileFormatRequested}&${limitOfArticles}`;
+let url = `${baseURL}?&${fileFormatRequested}&${limitOfArticles}`
 
 // Fetch the stuff
 function getNews() {
-  // fetch("/api-response-placeholder.json")
+  // fetch('/api-response-placeholder.json')
   fetch(url)
-    .then((res) => {
-      return res.json();
+    .then(res => {
+      console.log(res.json)
+      return res.json()
     })
-    .then((data) => {
+    .then(data => {
+      console.log(data)
+      localObject = data
       for (i = 0; i < limitOfArticlesAmount; i++) {
-        renderNews(data);
+        renderNews(data)
       }
-      renderPagination(data);
-      console.log(url);
-    });
+      // renderPagination(data)
+      prevNextPageButtonRender(data)
+
+      console.log(url)
+      // console.log(data.results[0].published_at.toLocaleDateString(en-US))
+    })
 }
 
 function searchNews(input) {
-  url = `${url}&search=${input}`;
-  getNews();
+  url = `${url}&search=${input}`
+  getNews()
 }
 
 function goToPage(input) {
-  window.scrollTo(0, 0);
-  $topContainer.empty();
-  $pagesContainer.empty();
-  let offsetAmount = input * limitOfArticlesAmount;
-  url = `${url}&offset=${offsetAmount}`;
-  getNews();
+  window.scrollTo(0, 0)
+  $topContainer.empty()
+  $pagesContainer.empty()
+  let offsetAmount = input * limitOfArticlesAmount
+  url = `${url}&offset=${offsetAmount}`
+  getNews()
+}
+
+function goToPrevNextPage(input) {
+  window.scrollTo(0, 0)
+  $topContainer.empty()
+  $pagesContainer.empty()
+  url = input
+  getNews()
 }
 
 function searchEvent(event) {
-  event.preventDefault();
-  $topContainer.empty();
-  $pagesContainer.empty();
-  const form = event.target;
-  const formData = new FormData(form);
-  const userSearch = formData.get("user-input");
-  searchNews(userSearch);
+  event.preventDefault()
+  $topContainer.empty()
+  $pagesContainer.empty()
+  const form = event.target
+  const formData = new FormData(form)
+  const userSearch = formData.get('user-input')
+  searchNews(userSearch)
 }
 
 function renderNews(res) {
   // Make tile
-  let $newsBoxContainer = $("<div>").attr("class", "news-box-container");
-  $topContainer.append($newsBoxContainer);
+  let $newsBoxContainer = $('<div>').attr('class', 'news-box-container')
+  $topContainer.append($newsBoxContainer)
 
   // Get photo
-  let $newsPhotoContainer = $("<div>").attr("class", "news-photo");
-  $newsPhotoContainer.html(`<img src="${res.results[i].image_url}">`);
-  $newsBoxContainer.append($newsPhotoContainer);
+  let $newsPhotoContainer = $('<div>').attr('class', 'news-photo')
+  $newsPhotoContainer.html(`<img src="${res.results[i].image_url}">`)
+  $newsBoxContainer.append($newsPhotoContainer)
 
   // Text Containers
-  let $newsTextContainer = $("<div>").attr("class", "news-text-container");
-  $newsBoxContainer.append($newsTextContainer);
-  let $newsDetailsAbsoluteContainer = $("<div>").attr("class", "news-details-absolute-container");
-  $newsBoxContainer.append($newsDetailsAbsoluteContainer);
-  let $newsDetailsContainer = $("<div>").attr("class", "news-details-container");
-  $newsDetailsAbsoluteContainer.append($newsDetailsContainer);
-  let $newsSummaryContainer = $("<div>").attr("class", "news-summary-container");
-  $newsDetailsContainer.append($newsSummaryContainer);
+  let $newsTextContainer = $('<div>').attr('class', 'news-text-container')
+  $newsBoxContainer.append($newsTextContainer)
+  let $newsDetailsAbsoluteContainer = $('<div>').attr('class', 'news-details-absolute-container')
+  $newsBoxContainer.append($newsDetailsAbsoluteContainer)
+  let $newsDetailsContainer = $('<div>').attr('class', 'news-details-container')
+  $newsDetailsAbsoluteContainer.append($newsDetailsContainer)
+  let $newsSummaryContainer = $('<div>').attr('class', 'news-summary-container')
+  $newsDetailsContainer.append($newsSummaryContainer)
 
   // Text Top+Bottom Sections
-  let $newsTextTop = $("<div>").attr("class", "news-text-top-container");
-  $newsTextContainer.append($newsTextTop);
-  let $newsTextBottom = $("<div>").attr("class", "news-text-bottom-container");
-  $newsTextContainer.append($newsTextBottom);
+  let $newsTextTop = $('<div>').attr('class', 'news-text-top-container')
+  $newsTextContainer.append($newsTextTop)
+  let $newsTextBottom = $('<div>').attr('class', 'news-text-bottom-container')
+  $newsTextContainer.append($newsTextBottom)
 
   // Photo overlays
-  let $photoOverlay = $("<div>").attr("class", "photo-overlay");
-  $newsBoxContainer.append($photoOverlay);
-  let $fullOverlay = $("<div>").attr("class", "full-overlay");
-  $newsBoxContainer.append($fullOverlay);
+  let $photoOverlay = $('<div>').attr('class', 'photo-overlay')
+  $newsBoxContainer.append($photoOverlay)
+  let $fullOverlay = $('<div>').attr('class', 'full-overlay')
+  $newsBoxContainer.append($fullOverlay)
 
   // Text
-  let $newsTitle = $("<div>").attr("class", "news-title").text(`${res.results[i].title}`);
-  $newsTextBottom.append($newsTitle);
-  let $newsSummary = $("<div>").attr("class", "news-summary").text(`${res.results[i].summary}`);
-  $newsSummaryContainer.append($newsSummary);
-  let $newsSource = $("<div>").attr("class", "news-source-link").html(`<a href="${res.results[i].url}" target=”_blank"><button>Full Article</button></a>`);
-  $newsDetailsContainer.append($newsSource);
-  let $newsSite = $("<div>").attr("class", "news-site").text(`${res.results[i].news_site}`);
-  $newsTextTop.append($newsSite);
-  let $newsTime = $("<div>").attr("class", "news-time").text(`${res.results[i].published_at}`);
-  $newsTextTop.append($newsTime);
+  let $newsTitle = $('<div>').attr('class', 'news-title').text(`${res.results[i].title}`)
+  $newsTextBottom.append($newsTitle)
+  let $newsSummary = $('<div>').attr('class', 'news-summary').text(`${res.results[i].summary}`)
+  $newsSummaryContainer.append($newsSummary)
+  let $newsSource = $('<div>')
+    .attr('class', 'news-source-link')
+    .html(`<a href="${res.results[i].url}" target=”_blank"><button>Full Article</button></a>`)
+  $newsDetailsContainer.append($newsSource)
+  let $newsSite = $('<div>').attr('class', 'news-site').text(`${res.results[i].news_site}`)
+  $newsTextTop.append($newsSite)
+  let $newsTime = $('<div>').attr('class', 'news-time').text(`${res.results[i].published_at}`)
+  $newsTextTop.append($newsTime)
 
   // Hover event listener
-  $newsBoxContainer.on("mouseenter", (event) => {
-    $newsTitle.css("opacity", 0);
-    $newsDetailsAbsoluteContainer.css("opacity", 1);
-    $fullOverlay.css("opacity", 1);
-    $newsTextTop.css("opacity", 0);
-  });
+  $newsBoxContainer.on('mouseenter', event => {
+    $newsTitle.css('opacity', 0)
+    $newsDetailsAbsoluteContainer.css('opacity', 1)
+    $fullOverlay.css('opacity', 1)
+    $newsTextTop.css('opacity', 0)
+  })
 
-  $newsBoxContainer.on("mouseleave", (event) => {
-    $newsTitle.css("opacity", 1);
-    $newsDetailsAbsoluteContainer.css("opacity", 0);
-    $fullOverlay.css("opacity", 0);
-    $newsTextTop.css("opacity", 1);
-  });
+  $newsBoxContainer.on('mouseleave', event => {
+    $newsTitle.css('opacity', 1)
+    $newsDetailsAbsoluteContainer.css('opacity', 0)
+    $fullOverlay.css('opacity', 0)
+    $newsTextTop.css('opacity', 1)
+  })
 }
 
 // Default Load the Latest
-getNews();
+getNews()
 
 // Fade out Title when searching in mobile
-let $mobileWidth = $(window).width();
-const $titleContainer = $(".title-container");
-const $search = $(".search");
-$search.on("click", fadeTitleInMobileWhenSearching());
+let $mobileWidth = $(window).width()
+const $titleContainer = $('.title-container')
+const $search = $('.search')
+$search.on('click', fadeTitleInMobileWhenSearching())
 
 function fadeTitleInMobileWhenSearching() {
   if ($mobileWidth < 767) {
-    $search.on("focus", (event) => $titleContainer.css("opacity", 0));
-    $search.on("blur", (event) => $titleContainer.css("opacity", 1));
+    $search.on('focus', event => $titleContainer.css('opacity', 0))
+    $search.on('blur', event => $titleContainer.css('opacity', 1))
   }
 }
 
 // Search event listener
-document.querySelector("form").addEventListener("submit", searchEvent);
+document.querySelector('form').addEventListener('submit', searchEvent)
 
 // Create page number+buttons
 
 function renderPagination(data) {
-  let $pageControllerContainer = $("<div>").attr("class", "page-controller-container");
-  $pagesContainer.append($pageControllerContainer);
-  let pagesAmount = Math.ceil(data.count / limitOfArticlesAmount);
+  let $pageControllerContainer = $('<div>').attr('class', 'page-controller-container')
+  $pagesContainer.append($pageControllerContainer)
+  let pagesAmount = Math.ceil(data.count / limitOfArticlesAmount)
   if (pagesAmount <= 10) {
     for (p = 1; p <= pagesAmount; p++) {
-      let $pageNumber = $("<div>").attr("class", "page-number").text(p);
-      $pageControllerContainer.append($pageNumber);
-      $pageNumber.on("click", (event) => {
-        const $target = $(event.target);
+      let $pageNumber = $('<div>').attr('class', 'page-number').text(p)
+      $pageControllerContainer.append($pageNumber)
+      $pageNumber.on('click', event => {
+        const $target = $(event.target)
         // this gets you the content of the page number
-        console.log($target[0].innerText);
-        goToPage($target[0].innerText);
+        console.log($target[0].innerText)
+        goToPage($target[0].innerText)
         // makePagesButtons(pagesAmount);
-      });
+      })
     }
   } else {
     for (p = 1; p <= 10; p++) {
-      let $pageNumber = $("<div>").attr("class", "page-number").text(p);
-      $pageControllerContainer.append($pageNumber);
-      $pageNumber.on("click", (event) => {
-        const $target = $(event.target);
-        // this gets you the content of the page number
-        console.log($target[0].innerText);
-        goToPage($target[0].innerText);
-      });
+      let $pageNumber = $('<div>').attr('class', 'page-number').text(p)
+      $pageControllerContainer.append($pageNumber)
+      $pageNumber.on('click', event => {
+        const $target = $(event.target)
+        console.log($target[0].innerText)
+        goToPage($target[0].innerText)
+      })
     }
-    let $pageNumberSeparator = $("<div>").addClass("separator").text("•••");
-    $pageControllerContainer.append($pageNumberSeparator);
-    let $pageNumber = $("<div>")
-      .addClass("page-number")
-      .text(pagesAmount - 1);
-    $pageControllerContainer.append($pageNumber);
-    $pageNumber.on("click", (event) => {
-      const $target = $(event.target);
-      $target.attr("class", ".page-number:active");
-      console.log($target[0].innerText);
-      currentPage = $target[0].innerText;
-      goToPage($target[0].innerText);
-    });
+    let $pageNumberSeparator = $('<div>').addClass('separator').text('•••')
+    $pageControllerContainer.append($pageNumberSeparator)
+    let $pageNumber = $('<div>')
+      .addClass('page-number')
+      .text(pagesAmount - 1)
+    $pageControllerContainer.append($pageNumber)
+    $pageNumber.on('click', event => {
+      const $target = $(event.target)
+      $target.attr('class', '.page-number:active')
+      console.log($target[0].innerText)
+      currentPage = $target[0].innerText
+      goToPage($target[0].innerText)
+    })
   }
 }
 
 function makePagesButtons(num) {
-  let $pageNumber = $("<div>").attr("class", "page-number").text(num);
-  $pageControllerContainer.append($pageNumber);
-  $pageNumber.on("click", (event) => {
-    const $target = $(event.target);
+  let $pageNumber = $('<div>').attr('class', 'page-number').text(num)
+  $pageControllerContainer.append($pageNumber)
+  $pageNumber.on('click', event => {
+    const $target = $(event.target)
     // this gets you the content of the page number
-    console.log($target[0].innerText);
-    goToPage($target[0].innerText);
-  });
+    console.log($target[0].innerText)
+    goToPage($target[0].innerText)
+  })
+}
+
+function prevNextPageButtonRender(data) {
+  let $pageControllerContainer = $('<div>').attr('class', 'page-controller-container')
+
+  $pagesContainer.append($pageControllerContainer)
+  let $prevPageButton = $('<div>').addClass('prev-button').text('< Back')
+  $prevPageButton.on('click', event => {
+    const $target = $(event.target)
+    goToPrevNextPage(data.previous)
+  })
+  $pageControllerContainer.append($prevPageButton)
+
+  // let $pageNumberDiv = $('<div>').addClass('page-number').text(`Page ${currentPageNumber}`)
+
+  let $nextPageButton = $('<div>').addClass('next-button').text('Next >')
+  $nextPageButton.on('click', event => {
+    const $target = $(event.target)
+    goToPrevNextPage(data.next)
+  })
+  $pageControllerContainer.append($nextPageButton)
 }
