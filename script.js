@@ -16,7 +16,7 @@ function getNews() {
   // fetch('/api-response-placeholder.json')
   fetch(url)
     .then(res => {
-      console.log(res.json)
+      // console.log(res.json)
       return res.json()
     })
     .then(data => {
